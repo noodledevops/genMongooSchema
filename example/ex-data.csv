@@ -1,0 +1,8 @@
+name,type,innerDef,addOption,comment
+name,String,,"default: '디폴트 값', required: true",TODO Test
+decNum,Decimal,,,TODO Test
+name2,Array,{type: Number},,
+person,Object,"age: {type: Number}, sex: {type: Number}",,
+
+
+
