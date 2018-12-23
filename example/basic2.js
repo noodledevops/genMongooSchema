@@ -1,7 +1,7 @@
 const genMongooSchema = require('../index')();
 
-const schmName = 'test3';
-const schmOption = '{_id: false}';
-const srcCsvPath = './ex-data.csv';
+const schmName = 'users';
+const schmOption = null;
+const srcCsvPath = './mongodb-schema - users.csv';
 
 console.log(genMongooSchema.genSchema(schmName, schmOption, srcCsvPath));

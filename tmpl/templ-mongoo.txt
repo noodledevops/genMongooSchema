@@ -1,9 +1,8 @@
-const mongoose  = require('mongoose');
-
-const Schema = Mongoose.Schema;
+const Schema = require('mongoose').Schema;
 
 const schema = new Schema({
     %s
 } %s);
 
-mongoose.model('%s', schema);
+exports.schema = schema;
+exports.name = '%s';

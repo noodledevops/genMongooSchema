@@ -11,7 +11,7 @@ const defaultOption = {
 function init(option) {
 
     const templMgSchmBody = fs.readFileSync(__dirname + '/tmpl/templ-mongoo.txt', 'utf-8');
-    const templDefFileds = require('./tmpl/js/fields');
+    const templDefFields = require('./tmpl/js/fields');
 
     function GenMongooSchema() {
         this.parseDelem = (option && option.parseDelem) ? option.parseDelem : defaultOption.delem;
@@ -40,13 +40,13 @@ function init(option) {
             if(!srcMongooGenData){
                 throw new Error(sprintf('%s::%s.%s', TAG, this.name, 'Error-loading data is wrong'))
             }
-            console.log(srcMongooGenData);
+            // console.log(srcMongooGenData);
 
             console.log('완료');
             console.log('2. 스키마 객체 내용 생성 시작');
             ///2. 클래스 생성 문자열 생성
             const result = instance.doGenMgClass(schmName, srcMongooGenData, schmOption);
-            console.log(result);
+            // console.log(result);
             console.log('완료');
             ///3. 결과 객체 파일 저장
             console.log('3. 결과 객체 파일 저장 시작');
@@ -104,21 +104,21 @@ function init(option) {
                 fieldResult += '    ';
             }
 
-            var isInnerType = defField.type === templDefFileds.getKeyName(templDefFileds.Array) || defField.type === templDefFileds.getKeyName(templDefFileds.Object);
+            var isInnerType = defField.type === templDefFields.getKeyName(templDefFields.Array) || defField.type === templDefFields.getKeyName(templDefFields.Object);
             // 기본 속성인 경우
-            if (templDefFileds.hasOwnProperty(defField.type) && !isInnerType) {
+            if (templDefFields.hasOwnProperty(defField.type) && !isInnerType) {
                 fieldResult += sprintf(
-                    templDefFileds[defField.type].tmpl,
+                    templDefFields[defField.type].tmpl,
                     defField.name,
-                    templDefFileds[defField.type].type, (defField.addOption) ? sprintf(', %s', defField.addOption) : ''
+                    templDefFields[defField.type].type, (defField.addOption) ? sprintf(', %s', defField.addOption) : ''
                 );
                 fieldResult += ',';
                 fieldResult += (defField.comment) ? sprintf(' // %s', defField.comment) : '';
 
             }
             // Array 타입인 경우
-            else if (templDefFileds.hasOwnProperty(defField.type) && isInnerType) {
-                fieldResult += sprintf(templDefFileds[defField.type].tmpl, defField.name, sprintf(templDefFileds[defField.type].type, defField.innerDef));
+            else if (templDefFields.hasOwnProperty(defField.type) && isInnerType) {
+                fieldResult += sprintf(templDefFields[defField.type].tmpl, defField.name, sprintf(templDefFields[defField.type].type, defField.innerDef));
                 fieldResult += ',';
                 fieldResult += (defField.comment) ? sprintf(' // %s', defField.comment) : '';
 
